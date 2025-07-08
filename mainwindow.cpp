@@ -1,20 +1,41 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QLabel>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(1200, 600); // o 800x600
+    setFixedSize(1200, 600);
+
+    QLabel* fondoMenu = new QLabel(this);
+    fondoMenu->setPixmap(QPixmap(":/menu.png").scaled(size()));
+    fondoMenu->setGeometry(0, 0, 1200, 600);
+    fondoMenu->lower(); // Manda al fondo
+
+    // Asegúrate de que los botones estén visibles encima
+    ui->nivel_1->raise();
+    ui->nivel_2->raise();
+    ui->nivel_3->raise();
 }
 
 
 
 void MainWindow::on_nivel_1_clicked() {
-    // Preparar Nivel 1
     qDebug() << "Nivel 1 – Carrera con Leche";
-    // Aquí podrías mostrar una nueva vista o iniciar lógica del nivel
+    // Ocultar botones del menú
+    ui->nivel_1->hide();
+    ui->nivel_2->hide();
+    ui->nivel_3->hide();
+
+    // Crear el nivel
+    nivelActual = new Nivel(this);
+
+    nivelActual->obtenerVista()->setParent(this);
+    nivelActual->obtenerVista()->show();
+    nivelActual->obtenerVista()->setFocus();
 }
 
 void MainWindow::on_nivel_2_clicked() {

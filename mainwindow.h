@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "nivel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +24,7 @@ private slots:
     void on_nivel_3_clicked();
 
 private:
+    Nivel* nivelActual;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

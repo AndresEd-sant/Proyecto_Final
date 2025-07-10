@@ -36,6 +36,19 @@ Jugador::Jugador(int x, int y, int ancho, int alto, int velocidad, int vidas, co
 
     saltoTimer = new QTimer(this);
     connect(saltoTimer, &QTimer::timeout, this, &Jugador::actualizarSalto);
+
+    timerContraataque = new QTimer(this);
+    timerCooldown = new QTimer(this);
+
+    connect(timerContraataque, &QTimer::timeout, this, [=]() {
+        modoContraataque = false;
+        qDebug() << "Contraataque terminado";
+    });
+
+    connect(timerCooldown, &QTimer::timeout, this, [=]() {
+        puedeContraatacar = true;
+        qDebug() << "Contraataque recargado";
+    });
 }
 
 // --------- Nivel 1: Carrera con Leche ---------
@@ -56,20 +69,29 @@ void Jugador::iniciarSalto() {
 }
 
 void Jugador::actualizarSalto() {
-    float t = (++tiempoSalto) * 0.1f; // Aumentar antes de usarlo
-    float nuevaY = posicionInicialSalto - (velocidadSalto * t - 0.5f * gravedad * t * t);
+    float t = (++tiempoSalto) * 0.1f;
+    float nuevaY;
 
-    qDebug() << "Actualizando salto. t =" << t << " nuevaY =" << nuevaY;
+    if (descensoRapido) {
+        velocidadSalto = 0;        // cancela la subida
+        gravedad = 1.0;            // gravedad más fuerte
+    }
+
+    nuevaY = posicionInicialSalto - (velocidadSalto * t - 0.5f * gravedad * t * t);
 
     if (nuevaY >= posicionInicialSalto) {
         setY(posicionInicialSalto);
         saltando = false;
+        descensoRapido = false;     // desactiva modo de caída rápida
+        velocidadSalto = 20.0;      // restablece valores normales
+        gravedad = 0.6;
         saltoTimer->stop();
         qDebug() << "Salto terminado";
     } else {
         setY(nuevaY);
     }
 }
+
 
 
 
@@ -102,16 +124,33 @@ void Jugador::keyPressEvent(QKeyEvent* event) {
         iniciarSalto();
         break;
     case Qt::Key_A:
-        setX(getX() - velocidad);
+        if (getX() > 0)
+            setX(getX() - velocidad);
         break;
     case Qt::Key_D:
-        setX(getX() + velocidad);
+        if (getX() + boundingRect().width() < 1200)
+            setX(getX() + velocidad);
         break;
     case Qt::Key_S:
-        qDebug() << "Tecla S presionada (acción opcional)";
+        if (saltando) {
+            descensoRapido = true;
+            qDebug() << "Descenso rápido activado";
+        }
         break;
+    case  Qt::Key_F :
+        if(puedeContraatacar){
+            modoContraataque = true;
+            puedeContraatacar = false;
+            timerContraataque->start(2000);  // 2 segundos activo
+            timerCooldown->start(10000);     // 10 segundos de recarga
+        }
+        break;
+
     default:
         break;
+    }
+    if (event->key() == Qt::Key_F && puedeContraatacar) {
+
     }
 }
 

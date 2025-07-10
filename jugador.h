@@ -14,6 +14,9 @@ class Jugador : public QObject, public Personaje {
 private:
     int puntaje;
     float oxigeno;
+    bool descensoRapido = false;
+
+    bool puedeContraatacar = true;
 
     // Para salto parabólico (Nivel 1)
     bool saltando;
@@ -30,6 +33,10 @@ private:
     QPixmap spriteSaltar;
     int frameActualCorrer;
     QTimer* animacionCorrerTimer;
+
+    bool modoContraataque = false;
+    QTimer* timerContraataque;
+    QTimer* timerCooldown;
 
 public:
     // Constructor
@@ -55,6 +62,12 @@ public:
     void setOxigeno(float o);
     int getPuntaje() const;
     void setPuntaje(int p);
+
+    bool estaEnModoContraataque() const { return modoContraataque; }
+
+
+signals:
+    void contraatacar();
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

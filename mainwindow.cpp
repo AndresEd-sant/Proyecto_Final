@@ -25,13 +25,28 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::on_nivel_1_clicked() {
     qDebug() << "Nivel 1 – Carrera con Leche";
-    // Ocultar botones del menú
     ui->nivel_1->hide();
     ui->nivel_2->hide();
     ui->nivel_3->hide();
 
-    // Crear el nivel
     nivelActual = new Nivel(this);
+    connect(nivelActual, &Nivel::regresarAlMenu, this, [=]() {
+        if (nivelActual) {
+            nivelActual->limpiarTodo(); // 🔴 LIMPIAR TODO PRIMERO
+            nivelActual->obtenerVista()->hide();
+            nivelActual->obtenerVista()->setParent(nullptr);
+            nivelActual->deleteLater();
+            nivelActual = nullptr;
+        }
+
+        QTimer::singleShot(50, this, [=]() {
+            ui->nivel_1->show();
+            ui->nivel_2->show();
+            ui->nivel_3->show();
+        });
+    });
+
+
 
     nivelActual->obtenerVista()->setParent(this);
     nivelActual->obtenerVista()->show();
@@ -45,7 +60,32 @@ void MainWindow::on_nivel_2_clicked() {
 
 void MainWindow::on_nivel_3_clicked() {
     qDebug() << "Nivel 3 – Entrenamiento Roshi";
-    // Lógica del nivel 3
+    ui->nivel_1->hide();
+    ui->nivel_2->hide();
+    ui->nivel_3->hide();
+    nivelActual = new Nivel(this,1,2);
+
+    connect(nivelActual, &Nivel::regresarAlMenu, this, [=]() {
+        if (nivelActual) {
+            nivelActual->limpiarTodo(); // 🔴 LIMPIAR TODO PRIMERO
+            nivelActual->obtenerVista()->hide();
+            nivelActual->obtenerVista()->setParent(nullptr);
+            nivelActual->deleteLater();
+            nivelActual = nullptr;
+        }
+
+        QTimer::singleShot(50, this, [=]() {
+            ui->nivel_1->show();
+            ui->nivel_2->show();
+            ui->nivel_3->show();
+        });
+    });
+
+
+
+    nivelActual->obtenerVista()->setParent(this);
+    nivelActual->obtenerVista()->show();
+    nivelActual->obtenerVista()->setFocus();
 }
 
 

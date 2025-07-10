@@ -6,11 +6,8 @@
 
 class Item : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
-private:
-private:
-    int ancho, alto;
 public:
-    Item(const QString& spritePath, int ancho, int alto);
+    Item(const QString& spritePath, int ancho, int alto, QGraphicsItem* parent = nullptr);
     void mover();
     bool estaFueraDePantalla() const;
 };

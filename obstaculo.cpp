@@ -1,7 +1,7 @@
 #include "obstaculo.h"
 
-Obstaculo::Obstaculo(const QString& rutaSprite, int ancho, int alto, const QString& tipo, QGraphicsItem* parent)
-    : QObject(), QGraphicsPixmapItem(parent), tipoMovimiento(tipo)
+Obstaculo::Obstaculo(const QString& rutaSprite, int ancho, int alto, const QString& tipo, int velocidad, QGraphicsItem* parent)
+    : QObject(), QGraphicsPixmapItem(parent), tipoMovimiento(tipo), velocidadX(velocidad)
 {
     QPixmap sprite(rutaSprite);
 
@@ -12,7 +12,7 @@ Obstaculo::Obstaculo(const QString& rutaSprite, int ancho, int alto, const QStri
         for (int row = 0; row < 2; ++row) {
             for (int col = 0; col < 2; ++col) {
                 QPixmap frame = sprite.copy(col * frameWidth, row * frameHeight, frameWidth, frameHeight)
-                .scaled(ancho, alto).transformed(QTransform().scale(-1, 1));;
+                .scaled(ancho, alto).transformed(QTransform().scale(-1, 1));
                 frames.append(frame);
             }
         }
@@ -26,10 +26,9 @@ Obstaculo::Obstaculo(const QString& rutaSprite, int ancho, int alto, const QStri
         setPixmap(sprite.scaled(ancho, alto));
     }
 
-    // Inicializar física para rebote
     if (tipo == "parabolico") {
         posYInicial = y();
-        velocidadY = -10;   // Salto inicial hacia arriba
+        velocidadY = -10;
         gravedad = 0.3;
     }
 }
@@ -42,25 +41,21 @@ void Obstaculo::animar() {
 
 void Obstaculo::mover() {
     if (tipoMovimiento == "lineal") {
-        moveBy(-3, 0);  // Abeja
-    }
-    else if (tipoMovimiento == "parabolico") {
-        // Movimiento parabólico con rebote fijo
+        moveBy(-velocidadX, 0);
+    } else if (tipoMovimiento == "parabolico") {
         velocidadY += gravedad;
-        moveBy(-4, velocidadY);
+        moveBy(-velocidadX, velocidadY);
 
-        const qreal sueloY = 450;  // <-- Rebota en esta posición fija
-
+        const qreal sueloY = 450;
         if (y() >= sueloY) {
             setY(sueloY);
-            velocidadY = -velocidadY * 0.9;  // Rebote con pérdida de energía
+            velocidadY = -velocidadY * 0.9;
             if (std::abs(velocidadY) < 1.5) {
-                velocidadY = 0; // Detener si es muy pequeño
+                velocidadY = 0;
             }
         }
-    }
-    else {
-        moveBy(-2, 0);  // Piedra
+    } else {
+        moveBy(-velocidadX, 0);
     }
 }
 

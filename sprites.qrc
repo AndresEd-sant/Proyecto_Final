@@ -1,0 +1,42 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fondo_nv1.png</file>
+        <file>Goku_16.png</file>
+        <file>Goku_15.png</file>
+        <file>Goku_14.png</file>
+        <file>piedra.png</file>
+        <file>leche.PNG</file>
+        <file>vidas.png</file>
+        <file>menu.png</file>
+        <file>fondo_nv3.png</file>
+        <file>roshi.png</file>
+        <file>abeja.png</file>
+        <file>tronco.png</file>
+        <file>Goku_1.png</file>
+        <file>Goku_2.png</file>
+        <file>Goku_abajo.png</file>
+        <file>Goku_arriba.png</file>
+        <file>proyectil.png</file>
+        <file>tiburon_1.png</file>
+        <file>tiburon_2.png</file>
+        <file>tiburon_3.png</file>
+        <file>oxigeno.png</file>
+        <file>Goku_esc1.png</file>
+        <file>Goku_esc2.png</file>
+        <file>Goku_esc3.png</file>
+        <file>Goku_esc4.png</file>
+        <file>Goku_esc_6.png</file>
+        <file>Goku_agachado.png</file>
+        <file>Fondo_nv2.png</file>
+        <file>roca_agi.png</file>
+        <file>sonidos/ballet-dancer.mp3</file>
+        <file>sonidos/danno.mp3</file>
+        <file>sonidos/Dano.mp3</file>
+        <file>sonidos/fondo_level1.mp3</file>
+        <file>sonidos/Intro_menu.mp3</file>
+        <file>sonidos/victoria.mp3</file>
+        <file>sonidos/MFondo_lv1.mp3</file>
+        <file>sonidos/MFondo_lv2.mp3</file>
+        <file>sonidos/MFondo_lv3.mp3</file>
+    </qresource>
+</RCC>

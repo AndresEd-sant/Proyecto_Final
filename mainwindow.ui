@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>995</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,40 +17,58 @@
    <widget class="QPushButton" name="nivel_1">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>310</y>
-      <width>83</width>
-      <height>29</height>
+      <x>20</x>
+      <y>500</y>
+      <width>221</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Old English Text MT</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Nivel 1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="nivel_2">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>380</y>
-      <width>83</width>
-      <height>29</height>
+      <x>280</x>
+      <y>500</y>
+      <width>221</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Old English Text MT</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Nivel 2</string>
     </property>
    </widget>
    <widget class="QPushButton" name="nivel_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>450</y>
-      <width>83</width>
-      <height>29</height>
+      <x>540</x>
+      <y>500</y>
+      <width>221</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Old English Text MT</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Nivel 3</string>
     </property>
    </widget>
   </widget>
@@ -59,7 +77,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>995</width>
      <height>25</height>
     </rect>
    </property>

@@ -18,13 +18,12 @@ public:
     bool esReflejado() const { return reflejado; }
     void setReflejado(bool tipo) {reflejado = tipo;}
 
-signals:
-    void proyectilDestruido();
-
 private:
+    QVector<QPixmap> animacion;
+    int frameActual = 0;
+    QTimer* animTimer;
     float vel;
     bool reflejado;
-    float t = 0.0f;
 };
 
 #endif // PROYECTIL_H

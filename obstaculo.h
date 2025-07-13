@@ -10,13 +10,10 @@ class Obstaculo : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 
 public:
-    Obstaculo(const QString& rutaSprite, int ancho, int alto, const QString& tipo = "", int velocidad = 3, QGraphicsItem* parent = nullptr);
-
+    Obstaculo(const QString& rutaSprite, int ancho, int alto, const QString& tipoMovimiento, QGraphicsItem* parent = nullptr);
     void mover();
     void animar();
     bool estaFueraDePantalla() const;
-    int velocidadX = 3;
-
 
 private:
     QString tipoMovimiento;

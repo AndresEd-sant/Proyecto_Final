@@ -11,17 +11,14 @@ class Enemigo : public QObject, public Personaje {
     Q_OBJECT
 
 public:
-    // Constructor para enemigos de disparo (nivel 3)
     Enemigo(int x, int y, int ancho, int alto, int velocidad, int vidas, const QString& rutaSprite);
+    ~Enemigo() override = default;
 
-    // Constructor para enemigos móviles como tiburones (nivel 2)
-    Enemigo(QVector<QPixmap> spritesMovimiento, int x, int y, int velocidad);
-
+    // Implementación de los métodos puros
     void mover() override;
     void recibirDano(int cantidad) override;
-    void iniciarAnimacionDisparo();
 
-    // Solo para enemigos tipo Roshi
+    void iniciarAnimacionDisparo();
     void animarMovimiento();
 
 signals:
@@ -32,27 +29,16 @@ private slots:
     void finParpadeo();
 
 private:
-    // ------- Para animación de disparo (nivel 3) -------
     QVector<QPixmap> framesDisparo;
     QPixmap frameFinal;
     int frameActual = 0;
     QTimer* timerAnimacion = nullptr;
 
-    // ------- Para animación de movimiento (nivel 2) -------
-    QVector<QPixmap> spritesMovimiento;
-    int frameMovimiento = 0;
-    int contadorFramesMovimiento = 0;
-    int paso = 0;
-
-    // ------- Parpadeo por daño -------
+    // Para el parpadeo al recibir daño
     QTimer* timerParpadeo = nullptr;
     int parpadeosRestantes = 0;
 
-    // ------- Datos generales -------
-    int anchoSprite = 0;
-    int altoSprite = 0;
-    int baseY = 0;
-    bool esTiburon = false;
+    int anchoSprite, altoSprite;
 };
 
 #endif // ENEMIGO_H

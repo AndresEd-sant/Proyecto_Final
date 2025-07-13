@@ -3,9 +3,6 @@
 
 #include <QMainWindow>
 #include "nivel.h"
-#include <QMediaPlayer>
-#include <QAudioOutput>
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,9 +17,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int nivelActualTipo = 1;
-    int nivelActualModo = 0;
-    void reiniciarNivelActual();
 
 private slots:
     void on_nivel_1_clicked();
@@ -32,8 +26,5 @@ private slots:
 private:
     Nivel* nivelActual;
     Ui::MainWindow *ui;
-    QMediaPlayer* musicaMenu;
-    QAudioOutput* salidaAudioMenu;
-
 };
 #endif // MAINWINDOW_H
